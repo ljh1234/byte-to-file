@@ -1,10 +1,12 @@
+
 /*
  * @Description: 
  * @Author: liujunhua
- * @Date: 2020-11-11 18:24:53
+ * @Date: 2020-11-13 10:34:21
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-11-11 18:36:11
+ * @LastEditTime: 2020-11-13 16:11:38
  */
+
 function convertRes2Blob(response: any) {
   // 提取文件名
   const fileName = response.headers['content-disposition'].match(
@@ -39,20 +41,6 @@ function convertRes2Blob(response: any) {
 }
 
 
-export const download = async (url: string, resOpts: any = {}) => {
-  const { type = 'get', data = '' } = resOpts
-  const queryArgs = {
-    url,
-    method: type,
-    data,
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json; charset=utf-8',
-      withCredentials: true,
-    },
-  }
-  // tips: 这里直接返回的是response整体!
-  const res = await axios.request(queryArgs).catch(err => console.log(err))
-  const result = ((res: any) => res)(res)
-  convertRes2Blob(result)
+export default function byteDownload(response: any) {
+  return new Promise(() => { convertRes2Blob(response) })
 }
