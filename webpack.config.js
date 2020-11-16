@@ -3,15 +3,15 @@
  * @Author: liujunhua
  * @Date: 2020-11-13 14:40:31
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-11-13 16:42:31
+ * @LastEditTime: 2020-11-16 15:36:34
  */
 const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 
 module.exports = {
   entry: './src/main.ts',
   output: {
-    filename: 'bundle.js',
+    filename: 'byte-download.js',
     path: path.resolve(__dirname, 'dist')
   },
   module: {
@@ -24,11 +24,9 @@ module.exports = {
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: './public/index.html'
-    })
-  ],
-  devServer: {
-    port: 4000
-  }
+    new CleanWebpackPlugin({
+      verbose: true,
+      cleanOnceBeforeBuildPatterns: ['dist']
+    }),
+  ]
 }
