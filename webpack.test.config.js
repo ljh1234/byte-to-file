@@ -3,14 +3,15 @@
  * @Author: liujunhua
  * @Date: 2020-11-16 15:06:32
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-11-16 16:42:03
+ * @LastEditTime: 2020-11-17 15:22:12
  */
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
-  entry: './test/test.js',
+  entry: './test/src/test.js',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'test/bundle')
@@ -18,17 +19,26 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.vue$/,
+        use: 'vue-loader',
+        exclude: /node_modules/
+      },
+      {
         test: /\.js?$/,
         use: 'babel-loader',
         exclude: /node_modules/
-      }
+      },
     ]
   },
   plugins: [
-    new CleanWebpackPlugin('[test/bundle]'),
+    new VueLoaderPlugin(),
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: ['test/bundle']
+    }),
     new HtmlWebpackPlugin({
-      template: './public/index.html'
-    })
+      template: './test/src/index.html'
+    }),
+    
   ],
   devServer: {
     port: 4000,
