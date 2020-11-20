@@ -3,22 +3,30 @@
  * @Author: liujunhua
  * @Date: 2020-11-13 14:40:31
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-11-16 15:36:34
+ * @LastEditTime: 2020-11-20 15:25:08
  */
 const path = require('path')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 
 module.exports = {
-  entry: './src/main.ts',
+  mode: 'production',
+  entry: './src/main.js',
   output: {
+    path: path.resolve(__dirname, 'dist'),
     filename: 'byte-download.js',
-    path: path.resolve(__dirname, 'dist')
+    library: 'byteDownload',
+    libraryExport: 'default',
+    globalObject: 'this',
+    libraryTarget: 'umd'
   },
   module: {
     rules: [
       {
-        test: /\.ts?$/,
-        use: 'ts-loader',
+        test: /\.js$/,
+        include: [
+          path.resolve(__dirname, 'src')
+        ],
+        use: 'babel-loader',
         exclude: /node_modules/
       }
     ]
@@ -27,6 +35,6 @@ module.exports = {
     new CleanWebpackPlugin({
       verbose: true,
       cleanOnceBeforeBuildPatterns: ['dist']
-    }),
+    })
   ]
 }

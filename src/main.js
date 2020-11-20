@@ -4,10 +4,10 @@
  * @Author: liujunhua
  * @Date: 2020-11-13 10:34:21
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-11-13 16:11:38
+ * @LastEditTime: 2020-11-20 15:34:02
  */
-
-function convertRes2Blob(response: any) {
+ /* jshint esversion: 6 */
+function convertRes2Blob(response) {
   // 提取文件名
   const fileName = response.headers['content-disposition'].match(
     /filename=(.*)/
@@ -40,7 +40,18 @@ function convertRes2Blob(response: any) {
   }
 }
 
-
-export default function byteDownload(response: any) {
-  return new Promise(() => { convertRes2Blob(response) })
+function byteDownload(response) {
+  return new Promise((resolve, reject) => { 
+    try {
+      convertRes2Blob(response)
+      resolve(response)
+    } catch (error) {
+      reject(error)
+    }
+  })
 }
+export default {
+  download: byteDownload
+}
+
+

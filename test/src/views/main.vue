@@ -3,7 +3,7 @@
  * @Author: liujunhua
  * @Date: 2020-11-17 15:04:43
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-11-17 15:28:54
+ * @LastEditTime: 2020-11-20 15:34:50
 -->
 <template>
   <div>
@@ -13,13 +13,17 @@
 
 <script>
 import axios from 'axios'
-import byteDownload from '../../../dist/byte-download'
+import byteDownload from '../../../src/main'
+
+console.log('byteDownload',byteDownload)
 
 export default {
   methods: {
     async handleDownload() {
-      const data = axios.get('/manager/task/exportToFile?taskId=8860b5d97a1f4hdbc4f74893c3g0011')
-      console.log(data);
+      const data =await axios.get('/manager/task/exportToFile?taskId=4c92219611404c92b8c972d7a96b0858')
+      byteDownload.download(data).then((res) => {
+        console.log('res',res)
+      })
     }
   }
 }
