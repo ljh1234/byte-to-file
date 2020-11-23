@@ -1,5 +1,5 @@
 {
-  "name": "byte-download",
+  "name": "byte-to-file",
   "version": "1.0.0",
   "description": "",
   "main": "./dist/byte-download.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ljh1234/byte-download.git"
+    "url": "git@github.com:ljh1234/byte-to-file.git"
   },
   "keywords": [
     "download"
@@ -18,9 +18,9 @@
   "author": "liujunhua",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ljh1234/byte-download/issues"
+    "url": "https://github.com/ljh1234/byte-to-file/issues"
   },
-  "homepage": "https://github.com/ljh1234/byte-download#readme",
+  "homepage": "https://github.com/ljh1234/byte-to-file#readme",
   "devDependencies": {
     "@babel/core": "^7.12.7",
     "@babel/plugin-transform-runtime": "^7.12.1",

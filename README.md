@@ -1,16 +1,16 @@
-# byte-download.js
+# byte-to-file.js
 A library for files download
 
 ##
 
 ## install
 ```
-npm install byte-download
+npm install byte-to-file
 ```
 
 ### use in js
 ```
-import byteDownload from 'byteDownload'
+import byteDownload from 'byte-to-file'
 
 async downloadFile() {
   const data = await axios.get('.....')
