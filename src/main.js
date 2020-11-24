@@ -1,20 +1,37 @@
-
 /*
  * @Description: 
  * @Author: liujunhua
  * @Date: 2020-11-13 10:34:21
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-11-20 15:34:02
+ * @LastEditTime: 2020-11-24 10:07:45
  */
- /* jshint esversion: 6 */
-function convertRes2Blob(response) {
+/* jshint esversion: 6 */
+function convertRes2Blob(response, name) {
+  const {
+    headers,
+    data
+  } = response
+  let fileName = ''
   // 提取文件名
-  const fileName = response.headers['content-disposition'].match(
-    /filename=(.*)/
-  )[1]
-  
+  if (name) {
+    fileName = name
+  } else {
+    fileName = headers['content-disposition'].match(
+      /filename=(.*)/
+    )[1]
+  }
+  if(!data) {
+    console.error('data is empty')
+    return
+  }
+
+
+
+
   // 将二进制流转为blob
-  const blob = new Blob([response.data], { type: 'application/octet-stream' })
+  const blob = new Blob([data], {
+    type: 'application/octet-stream'
+  })
 
   if (typeof window.navigator.msSaveBlob !== 'undefined') {
     // 兼容IE，window.navigator.msSaveBlob：以本地方式保存文件
@@ -40,10 +57,10 @@ function convertRes2Blob(response) {
   }
 }
 
-function byteDownload(response) {
-  return new Promise((resolve, reject) => { 
+function byteDownload(response, filename) {
+  return new Promise((resolve, reject) => {
     try {
-      convertRes2Blob(response)
+      convertRes2Blob(response, filename)
       resolve(response)
     } catch (error) {
       reject(error)
@@ -53,5 +70,3 @@ function byteDownload(response) {
 export default {
   download: byteDownload
 }
-
-
