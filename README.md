@@ -36,5 +36,5 @@ byteToFile.download(
 ```
 
 ### others
-This is the v1 package, I consider to add some new feature in the future
+This is the v1 package, I consider to add some new features in the future
 
