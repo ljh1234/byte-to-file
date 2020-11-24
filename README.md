@@ -1,11 +1,5 @@
-<<<<<<< HEAD
 # byte-to-file.js
-=======
-# byte-download.js
->>>>>>> dev
 A library for files download, small size, no dependencies, use the axios response which contains file stream.
-
-##
 
 ## install
 ```
